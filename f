@@ -21,3 +21,11 @@ if (Test-Path $startupFolder) {
 } else {
     Write-Host "Download failed."
 }
+try {
+    # Close all Chrome windows gracefully
+    (Get-Process -Name "chrome").CloseMainWindow()
+}
+catch {
+    # Handle the error
+    Write-Host "An error occurred while trying to close Chrome windows: $($_.Exception.Message)"
+}

